@@ -11,7 +11,7 @@
 
 #include "global_linear.h"
 
-void GlobalLinear::compute_s(vector<vector<int64_t>> &cost, const string &seq1, const string &seq2) {
+void GlobalLinear::compute_s(vector<vector<int64_t>> &cost, const vector<unsigned char> &seq1, const vector<unsigned char> &seq2) {
 
 }
 
@@ -22,3 +22,5 @@ void GlobalLinear::find_alignment(const vector<vector<int64_t>> &cost, vector<ch
 uint64_t GlobalLinear::num_alignments(vector<vector<int64_t>> &cost) {
     return 0;
 }
+
+

@@ -102,7 +102,6 @@ void parseInput(char* file1, char* file2){
 		str2+=tmp;
 	}
 	fin.close();
-
 }
 
 /*

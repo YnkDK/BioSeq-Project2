@@ -15,7 +15,7 @@
 #include "alignment.h"
 
 class GlobalLinear : public Alignment {
-    void compute_s(vector<vector<int64_t>> &cost, const string &seq1, const string &seq2);
+    void compute_s(vector<vector<int64_t>> &cost, const vector<unsigned char> &seq1, const vector<unsigned char> &seq2);
     void find_alignment(const vector<vector<int64_t>> &cost, vector<char> &alignment);
     uint64_t num_alignments(vector<vector<int64_t>> &cost);
 };
