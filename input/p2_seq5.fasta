@@ -1,0 +1,4 @@
+>seq5
+; Eval case 5 for global alignment usign linear and affine gap cost
+atgagtgacatcgaagccatggcgtctcaaggcaccaaacgatcatatgaacaaatggag
+actggtggggagcgccaggatgccacagaaatcagagcat
