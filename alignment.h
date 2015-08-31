@@ -1,6 +1,13 @@
-//
-// Created by mys on 8/31/15.
-//
+/* -------------------------------------------------------------------------------------
+** This software is implemented as part of the course
+**     Algorithms in Bioinformatics - Sequences Q1/2015
+** at Aarhus Univerity Denmark.
+**
+** alignment.h
+** TODO: Short description
+**
+** Author: Martin Storgaard, Konstantinos Mampentzidis and Henrik McQuoid Jespersen
+** -----------------------------------------------------------------------------------*/
 
 #ifndef BIOSEQ_PROJECT2_ALIGNMENT_H
 #define BIOSEQ_PROJECT2_ALIGNMENT_H
