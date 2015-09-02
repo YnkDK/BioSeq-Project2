@@ -11,7 +11,8 @@ set(SOURCE_FILES
     main.cpp)
 
 set(ALIGNMENT_ALGS
-    src/alignment.h
+    src/common.h
+    src/utils.h
     src/global_linear.h
     src/global_linear.cpp)
 
