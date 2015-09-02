@@ -82,6 +82,8 @@ void parse_file(const char *filename, vector<unsigned char> &sequence) {
             }
         }
     } while (getline(fin,tmp));
+    
+    fin.close();
 }
 
 int main(int argc, char** argv) {
