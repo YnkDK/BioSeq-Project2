@@ -57,30 +57,30 @@ void GlobalLinear::find_alignment_helper(int i, int j)
         
         if(S[i][j] == S[i-1][j-1]+score[seq1[i-1]][seq2[j-1]]){
             find_alignment_helper(i-1,j-1);
-            alignment.push_back(seq1[i-1]);
-            alignment.push_back(seq2[j-1]);
+            alignment.push_back(index_to_protein[seq1[i - 1]]);
+            alignment.push_back(index_to_protein[seq2[j - 1]]);
         }
         else if(S[i][j] == S[i][j-1]+gapcost){
             find_alignment_helper(i,j-1);
             alignment.push_back('-');
-            alignment.push_back(seq2[j-1]);
+            alignment.push_back(index_to_protein[seq2[j - 1]]);
         }
         else if(S[i][j] == S[i-1][j]+gapcost){
             find_alignment_helper(i-1,j);
-            alignment.push_back(seq1[i-1]);
+            alignment.push_back(index_to_protein[seq1[i - 1]]);
             alignment.push_back('-');
         }
     }
     else if(i == 0 && j > 0){
             while(j > 0){
                 alignment.push_back('-');
-                alignment.push_back(seq2[j-1]);
+                alignment.push_back(index_to_protein[seq2[j - 1]]);
                 j--;
             }
     }
     else if(j == 0 && i>0){
             while(i>0){
-                alignment.push_back(seq1[i-1]);
+                alignment.push_back(index_to_protein[seq1[i - 1]]);
                 alignment.push_back('-');
                 i--;
             }

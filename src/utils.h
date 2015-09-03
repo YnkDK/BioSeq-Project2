@@ -35,7 +35,7 @@ inline char parse_protein(char in) {
     exit(EXIT_FAILURE);
 }
 
-inline void parse_dna_file(const char *filename, vector<char> &sequence) {
+inline void parse_dna_file(const char *filename, vector<unsigned char> &sequence) {
     string tmp;
     ifstream fin;
 
@@ -120,16 +120,12 @@ inline void print_alignment_normal(vector<char>& alignment){
 
     size_t i;
     
-    const char index_to_protein[4] = { 'A', 'C', 'G', 'T' };
-    
     for(i=0;i<alignment.size();i+=2){
-        if(alignment[i] == '-') cout<<'-';
-        else cout<<index_to_protein[(int)alignment[i]];
+        cout << alignment[i];
     }
     cout<<endl;
     for(i=1;i<alignment.size();i+=2){
-        if(alignment[i] == '-') cout<<'-';
-        else cout<<index_to_protein[(int)alignment[i]];
+        cout << alignment[i];
     }
     cout<<endl;
 

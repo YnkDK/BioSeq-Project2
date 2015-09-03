@@ -27,10 +27,10 @@ private:
     vector<char> alignment;
     vector<vector<int64_t>> S;
     vector<vector<int64_t>> score;
-    vector<char> seq1;
+    vector<unsigned char> seq1;
     int64_t gapcost;
     int n, m;
-    vector<char> seq2;
+    vector<unsigned char> seq2;
     
     /*
      * functions

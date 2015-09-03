@@ -78,6 +78,7 @@ int main(int argc, char** argv) {
         cout << "There are " << num << " optimal alignments" << endl;
         cout << "Computed in " << (end - start) / CLOCKS_PER_SEC << " seconds." << endl << endl;
 
+        print_alignment_latex(alignment);
     }
 
     return EXIT_SUCCESS;

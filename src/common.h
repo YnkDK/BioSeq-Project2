@@ -27,13 +27,11 @@ public:
     virtual void find_alignment(vector<char>& alignment) = 0;
     virtual int64_t num_alignments() = 0;
 
-private:
-    
+protected:
     /**
      * Can be used to translate from unsigned char to char in find_alignment
      */
     const char index_to_protein[4] = { 'A', 'C', 'G', 'T' };
-    //TODO: is this index_to_protein actually needed?
 };
 
 #endif //BIOSEQ_PROJECT2_COMMON_H
