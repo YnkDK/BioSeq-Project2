@@ -42,7 +42,7 @@ int64_t GlobalLinear::compute_S() {
                 int v1 = S[i-1][j-1]+score[seq1[i-1]][seq2[j-1]];
                 int v2 = S[i][j-1]+gapcost;
                 int v3 = S[i-1][j]+gapcost;
-                S[i][j] = max(v1,max(v2,v3));
+                S[i][j] = min(v1,min(v2,v3));
         }
         
     }
