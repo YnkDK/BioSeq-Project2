@@ -18,6 +18,10 @@
 
 using namespace std;
 
+/*
+ * parsing proteins (case of capitals or non capitals, assume we always have non capitals)
+ * 
+ */
 inline char parse_protein(char in) {
     if(in == 'A' || in == 'a') {
         return 'a';
@@ -35,6 +39,11 @@ inline char parse_protein(char in) {
     exit(EXIT_FAILURE);
 }
 
+/*
+ * 
+ * read a sequence in FASTA format from a file 
+ * 
+ */
 inline void parse_dna_file(const char *filename, vector<unsigned char> &sequence) {
     string tmp;
     ifstream fin;
@@ -81,6 +90,11 @@ inline void parse_dna_file(const char *filename, vector<unsigned char> &sequence
     fin.close();
 }
 
+/*
+ * 
+ * parse the control file
+ * 
+ */
 inline void parse_control_file(vector<vector<int64_t>>& score, int64_t& gapCost){
 
 /*
@@ -116,6 +130,12 @@ inline void parse_control_file(vector<vector<int64_t>>& score, int64_t& gapCost)
     
 }
 
+/*
+ * 
+ * printing alignment
+ * 
+ * 
+ */
 inline void print_alignment_normal(vector<char>& alignment){
 
     size_t i;
@@ -131,6 +151,11 @@ inline void print_alignment_normal(vector<char>& alignment){
 
 }
 
+/*
+ * 
+ * printing alignment on latex form
+ * 
+ */
 inline void print_alignment_latex(vector<char> &alignment) {
     
         vector<char> seq1;
