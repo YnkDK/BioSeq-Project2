@@ -50,6 +50,7 @@ int main(int argc, char** argv) {
         if (strcmp(argv[1], "global_linear") == 0) {
             algorithm = new GlobalLinear();
         } else {
+            usage();
             exit(EXIT_FAILURE);
         }
         
