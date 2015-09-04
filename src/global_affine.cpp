@@ -64,12 +64,67 @@ int64_t GlobalAffine::compute_S() {
 
 void GlobalAffine::find_alignment_helper(int i, int j)
 {
+    if(i>0 && j>0){
+        
+        if(S[i][j] == S[i-1][j-1]+score[seq1[i-1]][seq2[j-1]]){
+            find_alignment_helper(i-1,j-1);
+            alignment.push_back(index_to_protein[seq1[i - 1]]);
+            alignment.push_back(index_to_protein[seq2[j - 1]]);
+        }
+        else{
+         
+            
+            int k = 1;
+            while(true){
+            
+                if(i>=k && S[i][j] == S[i-k][j]+affline(k)){
+                
+                    find_alignment_helper(i-k,j);
+                    for(int tmp=0; tmp<k; tmp++){
+                        alignment.push_back(index_to_protein[seq1[i - tmp - 1]]);
+                        alignment.push_back('-');
+                    }
+                    break;
+                    
+                }
+                else if(j>=k && S[i][j] == S[i][j-k]+affline(k)){
+  
+                    find_alignment_helper(i,j-k);
+                    for(int tmp=0; tmp<k; tmp++){
+                        alignment.push_back('-');
+                        alignment.push_back(index_to_protein[seq2[j - tmp - 1]]);
+                    }
+                    break;
+                }
+                
+                k++;
+            }
+            
+        }
+    }
+    else if(i == 0 && j > 0){
+            while(j > 0){
+                alignment.push_back('-');
+                alignment.push_back(index_to_protein[seq2[j - 1]]);
+                j--;
+            }
+    }
+    else if(j == 0 && i>0){
+            while(i>0){
+                alignment.push_back(index_to_protein[seq1[i - 1]]);
+                alignment.push_back('-');
+                i--;
+            }
+    }
+    return;
     
 }
 
 
 void GlobalAffine::find_alignment(vector<char>& alignment) {
-   
+    
+    find_alignment_helper(n-1,m-1);
+    alignment = this->alignment;
    
 }
 

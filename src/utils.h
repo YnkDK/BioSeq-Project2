@@ -140,7 +140,7 @@ inline void parse_global_affine_control_file(vector<vector<int64_t>>& score, int
 
 /*
  * Control file example
-  gapCost alpha beta
+  alpha beta
   0  5  2  5
   5  0  5  2
   2  5  0  5

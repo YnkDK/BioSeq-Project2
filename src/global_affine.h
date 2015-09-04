@@ -43,6 +43,10 @@ private:
     void find_alignment_helper(int i, int j);
     void markCells(int i, int j);
     
+    int64_t affline(int64_t k){
+        return alpha*k+beta;
+    }
+    
 public:
     /*
      * read all the necessary information from the external files
