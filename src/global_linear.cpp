@@ -18,10 +18,9 @@ void GlobalLinear::initialize(const char* file1, const char* file2){
     
     parse_dna_file(file1, seq1);
     parse_dna_file(file2, seq2);
-    parse_control_file(score,gapcost);
+    parse_global_linear_control_file(score,gapcost);
     n = seq1.size()+1;
     m = seq2.size()+1;
-
     S.resize(n, vector<int64_t>(m,0));
     
 }

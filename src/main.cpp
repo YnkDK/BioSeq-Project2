@@ -15,6 +15,7 @@
 #include <ctime>
 #include "common.h"
 #include "global_linear.h"
+#include "global_affine.h"
 
 using namespace std;
 
@@ -49,7 +50,10 @@ int main(int argc, char** argv) {
         
         if (strcmp(argv[1], "global_linear") == 0) {
             algorithm = new GlobalLinear();
-        } else {
+        } 
+        else if (strcmp(argv[1], "global_affine") == 0){
+            algorithm = new GlobalAffine();
+        }else {
             usage();
             exit(EXIT_FAILURE);
         }

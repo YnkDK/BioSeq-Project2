@@ -92,10 +92,10 @@ inline void parse_dna_file(const char *filename, vector<unsigned char> &sequence
 
 /*
  * 
- * parse the control file
+ * parse the control file for global linear
  * 
  */
-inline void parse_control_file(vector<vector<int64_t>>& score, int64_t& gapCost){
+inline void parse_global_linear_control_file(vector<vector<int64_t>>& score, int64_t& gapCost){
 
 /*
  * Control file example
@@ -112,13 +112,54 @@ inline void parse_control_file(vector<vector<int64_t>>& score, int64_t& gapCost)
  * */
 
     ifstream fin;
-    fin.open("control");
+    fin.open("control_global_linear");
     if(fin.fail()){
         cout<<"control file does not exist."<<endl;
          exit(EXIT_FAILURE);
     }
     
     fin>>gapCost;
+    score.resize(4, vector<int64_t>(4));
+    
+    int i,j;
+    for(i=0;i<4;i++)
+        for(j=0;j<4;j++)
+            fin>>score[i][j];
+        
+    fin.close();
+    
+}
+
+
+/*
+ * 
+ * parse the control file for global affine
+ * 
+ */
+inline void parse_global_affine_control_file(vector<vector<int64_t>>& score, int64_t & alpha, int64_t & beta){
+
+/*
+ * Control file example
+  gapCost alpha beta
+  0  5  2  5
+  5  0  5  2
+  2  5  0  5
+  5  2  5  0
+ * 
+ * First line defines the gapcost
+ * The remaining lines define the score matrix. We assume that the score matrix has the same form as the one in project 1.
+ * We also assume that the control file always exists and has the correct form.
+ * 
+ * */
+
+    ifstream fin;
+    fin.open("control_global_affine");
+    if(fin.fail()){
+        cout<<"control file does not exist."<<endl;
+         exit(EXIT_FAILURE);
+    }
+    
+    fin>>alpha>>beta;
     score.resize(4, vector<int64_t>(4));
     
     int i,j;

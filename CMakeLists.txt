@@ -14,6 +14,8 @@ set(ALIGNMENT_ALGS
     src/common.h
     src/utils.h
     src/global_linear.h
-    src/global_linear.cpp)
+    src/global_linear.cpp
+    src/global_affine.h
+    src/global_affine.cpp)
 
 add_executable(BioSeq_Project2 ${ALIGNMENT_ALGS} src/main.cpp)
