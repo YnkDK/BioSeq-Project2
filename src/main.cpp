@@ -16,12 +16,14 @@
 #include "common.h"
 #include "global_linear.h"
 #include "global_affine.h"
+#include "performance.h"
 
 using namespace std;
 
 bool valid_action(const char *needle) {
     return strcmp(needle, "all") ||
-           strcmp(needle, "global_linear");
+           strcmp(needle, "global_linear") ||
+           strcmp(needle, "performance");
 }
 
 void usage(){
@@ -39,11 +41,11 @@ int main(int argc, char** argv) {
     if (strcmp(argv[1], "all") == 0) {
         // Run all algorithms once to produce the output
         vector<Common *> algorithms = {
-                new GlobalLinear()
+                new GlobalLinear(),
+                new GlobalAffine()
         };
-        for(auto alg : algorithms) {
-
-        }
+        Performance *p = new Performance();
+        p->run(algorithms, argv[2], argv[3]);
     } else {
         // Run a specific algorithm to produce the output
         Common *algorithm;

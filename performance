@@ -1,0 +1,11 @@
+#!/bin/bash
+if ! ./make.sh ; then
+    echo "=============================================="
+    echo "================ MAKE FAILED! ================"
+    echo "=============================================="
+    exit $?
+fi
+
+echo ""
+echo ""
+./build/bin/BioSeq_Project2 all $1 $2
