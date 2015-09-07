@@ -8,4 +8,15 @@ fi
 
 echo ""
 echo ""
-./build/bin/BioSeq_Project2 all $1 $2
+
+for f1 in input/*.fasta
+do
+    for f2 in input/*.fasta
+    do
+        if [ "$f1" == "$f2" ]
+        then
+            break
+        fi
+        ./build/bin/BioSeq_Project2 all ${f1} ${f2}
+    done
+done

@@ -14,7 +14,6 @@
 void Performance::run(std::vector<Common *> &algorithms, const char *file1, const char *file2) {
     int64_t opt;
     long long cpuClock;
-    std::cout << "Garbage\tCost\tCPU\tAlgorithm\tSequence 1\tn\tSequence 2\tm" << std::endl;
     for(auto alg : algorithms) {
         // Initialize algorithm
         alg->initialize(file1, file2);
@@ -23,15 +22,15 @@ void Performance::run(std::vector<Common *> &algorithms, const char *file1, cons
         const int m = alg->get_m();
         for(int i = 0; i < PERFORMANCE_RUNS; i++) {
             // Clear cache
-            // Allocate 6 MiB of data (CPU cache size of i7-4710HQ)
+            // Allocate 12 MiB of data (CPU cache size of i7-4710HQ is 6 MiB)
             const unsigned long long SIZE = 12 * 1024 * 1024;
-            unsigned char *garbage = (unsigned char *) malloc(SIZE);
+            unsigned char *garbage = (unsigned char *) malloc(SIZE * sizeof(unsigned char));
             garbage[0] = (unsigned char) ((unsigned char) (i + (unsigned long long) name) & 0xFF);
             for (unsigned int j = 1; j < SIZE; j++) {
-                // Use inspiration from init of MT19937, which uses different instructions
-                for(unsigned int k = 0; k < j; k += SIZE/8) {
+                for(unsigned int k = 0; k < j; k += SIZE/8) { // Jump around in the garbage array
+                    // Use inspiration from init of MT19937, which uses different instructions
                     garbage[j] = (unsigned char) (
-                            (1812433253 * ((long long)garbage[k] ^ (((long long)garbage[k] >> 30) + j))) & 0xFF);
+                            (1812433253LL * ((long long)garbage[k] ^ (((long long)garbage[k] >> 30) + j))) & 0xFF);
                 }
             }
             std::cout << (unsigned short) garbage[SIZE - 1] << "\t";
