@@ -26,6 +26,10 @@ public:
     virtual int64_t compute_S() = 0;
     virtual void find_alignment(vector<char>& alignment) = 0;
     virtual int64_t num_alignments() = 0;
+    virtual const char *get_name() = 0;
+    virtual int get_n() = 0;
+    virtual int get_m() = 0;
+
 
 protected:
     /**

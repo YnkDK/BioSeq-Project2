@@ -138,3 +138,14 @@ int64_t GlobalAffine::num_alignments() {
     return 0;
 }
 
+const char *GlobalAffine::get_name() {
+    return "global_affine";
+}
+
+int GlobalAffine::get_n() {
+    return this->n;
+}
+
+int GlobalAffine::get_m() {
+    return this->m;
+}

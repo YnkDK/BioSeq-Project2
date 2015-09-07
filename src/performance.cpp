@@ -11,24 +11,30 @@
 
 #include "performance.h"
 
-#include <iostream>
-
-void Performance::run(std::vector<Common *> &algs, const char *file1, const char *file2) {
-    int64_t opt, cpuClock;
-    for(auto alg : algs) {
+void Performance::run(std::vector<Common *> &algorithms, const char *file1, const char *file2) {
+    int64_t opt;
+    long long cpuClock;
+    std::cout << "Garbage\tCost\tCPU\tAlgorithm\tSequence 1\tn\tSequence 2\tm" << std::endl;
+    for(auto alg : algorithms) {
         // Initialize algorithm
         alg->initialize(file1, file2);
+        const char *name = alg->get_name();
+        const int n = alg->get_n();
+        const int m = alg->get_m();
         for(int i = 0; i < PERFORMANCE_RUNS; i++) {
             // Clear cache
             // Allocate 6 MiB of data (CPU cache size of i7-4710HQ)
-            const unsigned long long SIZE = 6 * 1024 * 1025;
+            const unsigned long long SIZE = 12 * 1024 * 1024;
             unsigned char *garbage = (unsigned char *) malloc(SIZE);
-            garbage[0] = i+13;
-            for (int j = 1; j < SIZE; j++) {
-                // Use init of MT19937, which uses different instructions
-                garbage[j] = (1812433253 * ((long long)garbage[j - 1] ^ ((long long)garbage[j - 1] >> 30) + j)) & 0xFFFF;
+            garbage[0] = (unsigned char) ((unsigned char) (i + (unsigned long long) name) & 0xFF);
+            for (unsigned int j = 1; j < SIZE; j++) {
+                // Use inspiration from init of MT19937, which uses different instructions
+                for(unsigned int k = 0; k < j; k += SIZE/8) {
+                    garbage[j] = (unsigned char) (
+                            (1812433253 * ((long long)garbage[k] ^ (((long long)garbage[k] >> 30) + j))) & 0xFF);
+                }
             }
-            std::cout << (unsigned int) garbage[SIZE - 1] << "\t";
+            std::cout << (unsigned short) garbage[SIZE - 1] << "\t";
             free(garbage);
 
             // Reset counters
@@ -42,22 +48,22 @@ void Performance::run(std::vector<Common *> &algs, const char *file1, const char
             // Get CPU clock count
             cpuClock = _get(PERF_TYPE_SOFTWARE, PERF_COUNT_SW_CPU_CLOCK);
             // Write cpu time
-            // TODO: Make output in correct format
-            std::cout << opt << "\t" << cpuClock << std::endl;
+            std::cout << opt << "\t" << cpuClock << "\t" << name << "\t";
+            std::cout << file1 << "\t" << n << "\t" << file2 << "\t" << m << std::endl;
         }
 
     }
 }
 
 static long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags) {
-    int ret;
+    long ret;
 
     ret = syscall(__NR_perf_event_open, hw_event, pid, cpu, group_fd, flags);
 
     return ret;
 }
 
-void Performance::_add(perf_type_id type, long long config) {
+void Performance::_add(perf_type_id type, uint64_t config) {
     struct perf_event_attr pe;
     memset(&pe, 0, sizeof(struct perf_event_attr));
     pe.size = sizeof(struct perf_event_attr);
@@ -77,15 +83,15 @@ void Performance::_add(perf_type_id type, long long config) {
         pe.read_format = PERF_FORMAT_GROUP;
         pe.disabled = 1;
 
-        fd = perf_event_open(&pe, 0, -1, -1, 0);
+        fd = (int) perf_event_open(&pe, 0, -1, -1, 0);
         if (fd < 0) {
-            fprintf(stderr, "Error opening leader for %llx / %llx\n", (long long) type, config);
+            fprintf(stderr, "Error opening leader for %llx / %lu\n", (long long) type, config);
             exit(EXIT_FAILURE);
         }
     } else {
-        int ret = perf_event_open(&pe, 0, -1, fd, 0);
+        long ret = perf_event_open(&pe, 0, -1, fd, 0);
         if (ret < 0) {
-            fprintf(stderr, "Error connecting to leader for %llx / %llx\n", (long long) type, config);
+            fprintf(stderr, "Error connecting to leader for %llx / %lu\n", (long long) type, config);
             exit(EXIT_FAILURE);
         }
     }
@@ -93,8 +99,8 @@ void Performance::_add(perf_type_id type, long long config) {
 
 long long Performance::_get(perf_type_id type, long long config) {
     long long buffer[1 /* <nr> */ + (1 /* <value> */ * perf_size /* [nr] */)];
-    int readSize = (1 + (1 * perf_size)) * sizeof(long long);
-    int r = read(fd, &buffer, readSize);
+    size_t readSize = (1 + (1 * perf_size)) * sizeof(long long);
+    ssize_t r = read(fd, &buffer, readSize);
     if (r == -1) {
         fprintf(stderr, "Error reading from fd\n");
         exit(EXIT_FAILURE);
@@ -104,6 +110,6 @@ long long Performance::_get(perf_type_id type, long long config) {
             return buffer[1 + index];
         }
     }
-    fprintf(stderr, "Could not find sw config: %llx\n", (long long) config);
+    fprintf(stderr, "Could not find sw config: %llx\n", config);
     exit(EXIT_FAILURE);
 }

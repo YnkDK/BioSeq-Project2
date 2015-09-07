@@ -29,7 +29,6 @@ private:
     vector<vector<int64_t>> score;
     vector<unsigned char> seq1;
     int64_t gapcost;
-    int n, m;
     vector<unsigned char> seq2;
     
     /*
@@ -40,6 +39,8 @@ private:
     void markCells(int i, int j);
     
 public:
+    int n, m;
+
     /*
      * read all the necessary information from the external files
      * 
@@ -62,7 +63,11 @@ public:
      * 
      */
     int64_t num_alignments();
-     
+
+    const char *get_name();
+
+    int get_n();
+    int get_m();
 };
 
 #endif //BIOSEQ_PROJECT2_GLOBAL_LINEAR_H

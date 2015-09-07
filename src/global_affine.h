@@ -70,6 +70,11 @@ public:
      * 
      */
     int64_t num_alignments();
+
+    const char *get_name();
+
+    int get_n();
+    int get_m();
      
 };
 

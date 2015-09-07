@@ -144,3 +144,14 @@ int64_t GlobalLinear::num_alignments() {
     return 0;
 }
 
+const char *GlobalLinear::get_name() {
+    return "global_linear";
+}
+
+int GlobalLinear::get_n() {
+    return this->n;
+}
+
+int GlobalLinear::get_m() {
+    return this->m;
+}

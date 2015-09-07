@@ -29,14 +29,14 @@
 #include <asm/unistd.h>
 
 struct e {
-    long long type, config;
+    uint64_t type, config;
 
     e() {
         type = 0;
         config = 0;
     };
 
-    e(long long init_type, long long init_config) {
+    e(uint64_t init_type, uint64_t init_config) {
         type = init_type;
         config = init_config;
     };
@@ -48,15 +48,14 @@ private:
     int events;
     int fd;
     e *order;
-    int sampleSize;
 
-    void _add(perf_type_id type, long long config);
+    void _add(perf_type_id type, uint64_t config);
 
     long long _get(perf_type_id type, long long config);
 
 
 public:
-    virtual void run(std::vector<Common *> &algs, const char *file1, const char *file2);
+    virtual void run(std::vector<Common *> &algorithms, const char *file1, const char *file2);
 
     Performance() {
         this->perf_size = 1;
