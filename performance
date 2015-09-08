@@ -9,6 +9,7 @@ fi
 echo ""
 echo ""
 
+echo -e "Garbage\tScore\tCPU clock\tAlgorithm\tSequence 1\tn\tSequence 2\tm" > output/performance.stat
 for f1 in input/*.fasta
 do
     for f2 in input/*.fasta
@@ -17,6 +18,6 @@ do
         then
             break
         fi
-        ./build/bin/BioSeq_Project2 all ${f1} ${f2}
+        ./build/bin/BioSeq_Project2 all ${f1} ${f2} >> output/performance.stat
     done
 done
