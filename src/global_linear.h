@@ -50,7 +50,7 @@ public:
     /*
      * compute the S matrix ( the cost matrix )
      */
-    uint64_t compute_S();
+    int64_t compute_S();
     
     /*
      * find an alignment and store it inside a vector
@@ -62,12 +62,16 @@ public:
      * find the number of optimal alignments
      * 
      */
-    uint64_t num_alignments();
+    int64_t num_alignments();
 
     const char *get_name();
 
     int get_n();
     int get_m();
+    
+    
+    bool check();
+
 };
 
 #endif //BIOSEQ_PROJECT2_GLOBAL_LINEAR_H

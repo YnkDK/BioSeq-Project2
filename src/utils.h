@@ -171,6 +171,16 @@ inline void parse_global_affine_control_file(vector<vector<int64_t>>& score, int
     
 }
 
+inline int getIndexFromProtein(char c){
+
+    if(c == 'A') return 0;
+    if(c == 'C') return 1;
+    if(c == 'G') return 2;
+    return 3;
+    
+
+}
+
 /*
  * 
  * printing alignment
@@ -181,10 +191,12 @@ inline void print_alignment_normal(vector<char>& alignment){
 
     size_t i;
     
+    cout << ">seq1" << endl;
     for(i=0;i<alignment.size();i+=2){
         cout << alignment[i];
     }
     cout<<endl;
+    cout << ">seq2" << endl;
     for(i=1;i<alignment.size();i+=2){
         cout << alignment[i];
     }

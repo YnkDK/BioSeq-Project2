@@ -57,7 +57,7 @@ public:
     /*
      * compute the S matrix ( the cost matrix ) and return the number of optimal aligments
      */
-    uint64_t compute_S();
+    int64_t compute_S();
     
     /*
      * find an alignment and store it inside a vector
@@ -69,9 +69,11 @@ public:
      * find the number of optimal alignments
      * 
      */
-    uint64_t num_alignments();
+    int64_t num_alignments();
 
     const char *get_name();
+    
+    bool check();
 
     int get_n();
     int get_m();

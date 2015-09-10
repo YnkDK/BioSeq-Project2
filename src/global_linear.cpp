@@ -25,7 +25,7 @@ void GlobalLinear::initialize(const char* file1, const char* file2){
     
 }
 
-uint64_t GlobalLinear::compute_S() {
+int64_t GlobalLinear::compute_S() {
     
     int i,j;
     
@@ -113,7 +113,7 @@ void GlobalLinear::markCells(int i, int j){
                 markCells(i-1,j);
 }
 
-uint64_t GlobalLinear::num_alignments() {
+int64_t GlobalLinear::num_alignments() {
     
     
     visited.resize(n,vector<bool>(m,false));
@@ -154,4 +154,21 @@ int GlobalLinear::get_n() {
 
 int GlobalLinear::get_m() {
     return this->m;
+}
+
+bool GlobalLinear::check()
+{
+    
+    size_t i;
+    int64_t myscore = 0;
+    for(i=0;i<alignment.size();i+=2){
+    
+        if(alignment[i]!='-' && alignment[i+1]!='-')
+            myscore = myscore + score[getIndexFromProtein(alignment[i])][getIndexFromProtein(alignment[i+1])];
+        else myscore = myscore + gapcost;
+    
+    }
+    if(myscore == S[n-1][m-1]) return true;
+    return false;
+
 }

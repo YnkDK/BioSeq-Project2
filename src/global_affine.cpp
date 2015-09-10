@@ -26,7 +26,7 @@ void GlobalAffine::initialize(const char* file1, const char* file2){
     
 }
 
-uint64_t GlobalAffine::compute_S() {
+int64_t GlobalAffine::compute_S() {
     
     S[0][0] = 0;
     int i,j;
@@ -133,7 +133,7 @@ void GlobalAffine::markCells(int i, int j){
  
 }
 
-uint64_t GlobalAffine::num_alignments() {
+int64_t GlobalAffine::num_alignments() {
     
     return 0;
 }
@@ -148,4 +148,39 @@ int GlobalAffine::get_n() {
 
 int GlobalAffine::get_m() {
     return this->m;
+}
+
+
+bool GlobalAffine::check()
+{
+    
+    size_t i,j;
+    int64_t myscore = 0;
+    i=0;
+    while(i<alignment.size()){
+    
+        if(alignment[i]!='-' && alignment[i+1]!='-'){
+            myscore = myscore + score[getIndexFromProtein(alignment[i])][getIndexFromProtein(alignment[i+1])];
+            i = i + 2;
+        }
+        else{
+         
+            myscore = myscore + alpha + beta;
+            j = i+2;
+            while(j < alignment.size() && ( alignment[j] == '-' || alignment[j+1] == '-' )){
+             
+                myscore += alpha;
+                j = j + 2;
+                
+            }
+            
+            i = j;
+            
+        }
+    
+    }
+    
+    if(myscore == S[n-1][m-1]) return true;
+    return false;
+
 }
