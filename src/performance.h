@@ -4,7 +4,7 @@
 ** at Aarhus Univerity Denmark.
 **
 ** performance.h
-** Main file
+** performance file
 **
 ** Author: Martin Storgaard, Konstantinos Mampentzidis and Henrik McQuoid Jespersen
 ** -----------------------------------------------------------------------------------*/

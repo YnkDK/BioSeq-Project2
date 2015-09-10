@@ -25,7 +25,7 @@ void GlobalLinear::initialize(const char* file1, const char* file2){
     
 }
 
-int64_t GlobalLinear::compute_S() {
+uint64_t GlobalLinear::compute_S() {
     
     int i,j;
     
@@ -113,7 +113,7 @@ void GlobalLinear::markCells(int i, int j){
                 markCells(i-1,j);
 }
 
-int64_t GlobalLinear::num_alignments() {
+uint64_t GlobalLinear::num_alignments() {
     
     
     visited.resize(n,vector<bool>(m,false));

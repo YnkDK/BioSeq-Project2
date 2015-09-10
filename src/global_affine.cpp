@@ -26,7 +26,7 @@ void GlobalAffine::initialize(const char* file1, const char* file2){
     
 }
 
-int64_t GlobalAffine::compute_S() {
+uint64_t GlobalAffine::compute_S() {
     
     S[0][0] = 0;
     int i,j;
@@ -133,7 +133,7 @@ void GlobalAffine::markCells(int i, int j){
  
 }
 
-int64_t GlobalAffine::num_alignments() {
+uint64_t GlobalAffine::num_alignments() {
     
     return 0;
 }
