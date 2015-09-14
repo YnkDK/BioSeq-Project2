@@ -36,12 +36,15 @@ void Performance::run(std::vector<Common *> &algorithms, const char *file1, cons
             std::cout << (unsigned short) garbage[SIZE - 1] << "\t";
             free(garbage);
 
+            vector<char> alignment;
+
+            // Compute S
+            opt = alg->compute_S();
             // Reset counters
             ioctl(this->fd, PERF_EVENT_IOC_RESET, PERF_IOC_FLAG_GROUP);
             // Start counting
             ioctl(this->fd, PERF_EVENT_IOC_ENABLE, PERF_IOC_FLAG_GROUP);
-            // Compute S
-            opt = alg->compute_S();
+            alg->find_alignment(alignment);
             // Stop counting
             ioctl(this->fd, PERF_EVENT_IOC_DISABLE, PERF_IOC_FLAG_GROUP);
             // Get CPU clock count
@@ -49,6 +52,7 @@ void Performance::run(std::vector<Common *> &algorithms, const char *file1, cons
             // Write cpu time
             std::cout << opt << "\t" << cpuClock << "\t" << name << "\t";
             std::cout << file1 << "\t" << n << "\t" << file2 << "\t" << m << std::endl;
+            alignment.clear();
         }
 
     }

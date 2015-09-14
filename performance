@@ -10,14 +10,32 @@ echo ""
 echo ""
 
 echo -e "Garbage\tScore\tCPU clock\tAlgorithm\tSequence 1\tn\tSequence 2\tm" > output/performance.stat
-for f1 in input/*.fasta
-do
-    for f2 in input/*.fasta
-    do
-        if [ "$f1" == "$f2" ]
-        then
-            break
-        fi
-        ./build/bin/BioSeq_Project2 all ${f1} ${f2} >> output/performance.stat
-    done
-done
+./build/bin/BioSeq_Project2 all input/random-n10000-seed10000.fasta input/random-n10000-seed4320.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n1000-seed1000.fasta input/random-n1000-seed4260.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n100-seed100.fasta input/random-n100-seed4144.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n11000-seed11000.fasta input/random-n11000-seed4325.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n12000-seed12000.fasta input/random-n12000-seed4330.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n13000-seed13000.fasta input/random-n13000-seed4335.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n14000-seed14000.fasta input/random-n14000-seed4340.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n15000-seed15000.fasta input/random-n15000-seed4345.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n16000-seed16000.fasta input/random-n16000-seed4350.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n17000-seed17000.fasta input/random-n17000-seed4356.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n18000-seed18000.fasta input/random-n18000-seed4361.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n19000-seed19000.fasta input/random-n19000-seed4366.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n20000-seed20000.fasta input/random-n20000-seed4371.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n2000-seed2000.fasta input/random-n2000-seed4280.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n200-seed200.fasta input/random-n200-seed4220.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n3000-seed3000.fasta input/random-n3000-seed4285.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n300-seed300.fasta input/random-n300-seed4225.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n4000-seed4000.fasta input/random-n4000-seed4290.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n400-seed400.fasta input/random-n400-seed4230.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n5000-seed4295.fasta input/random-n5000-seed5000.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n500-seed4235.fasta input/random-n500-seed500.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n6000-seed4300.fasta input/random-n6000-seed6000.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n600-seed4240.fasta input/random-n600-seed600.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n7000-seed4305.fasta input/random-n7000-seed7000.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n700-seed4245.fasta input/random-n700-seed700.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n8000-seed4310.fasta input/random-n8000-seed8000.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n800-seed4250.fasta input/random-n800-seed800.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n9000-seed4315.fasta input/random-n9000-seed9000.fasta >> output/performance.stat
+./build/bin/BioSeq_Project2 all input/random-n900-seed4255.fasta input/random-n900-seed900.fasta >> output/performance.stat
