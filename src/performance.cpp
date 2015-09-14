@@ -4,7 +4,7 @@
 ** at Aarhus Univerity Denmark.
 **
 ** performance.cpp
-** Main file
+** file where all the functions of performance.h are implemented
 **
 ** Author: Martin Storgaard, Konstantinos Mampentzidis and Henrik McQuoid Jespersen
 ** -----------------------------------------------------------------------------------*/

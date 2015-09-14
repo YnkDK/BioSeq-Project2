@@ -62,9 +62,10 @@ int main(int argc, char** argv) {
         
         algorithm->initialize(argv[2], argv[3]);
         
+        cout << endl;
         cout << "Computing the cost matrix using " << argv[1] << endl;
         clock_t start = clock();
-        int64_t opt = algorithm->compute_S();
+        uint64_t opt = algorithm->compute_S();
         clock_t end = clock();
         cout << "Optimal alignment cost: " << opt << endl;
         cout << "Computed in " << (end - start) / CLOCKS_PER_SEC << " seconds." << endl << endl;
@@ -75,17 +76,25 @@ int main(int argc, char** argv) {
         algorithm->find_alignment(alignment);
         end = clock();
         //print_alignment_latex(alignment);
+        //cout << "To print remove the comments in the main.cpp file" << endl;
         print_alignment_normal(alignment);
         cout << "Found in " << (end - start) / CLOCKS_PER_SEC << " seconds." << endl << endl;
-        cout << "Computing the total number of optimal alignments" << endl;
-        
-        start = clock();
-        int64_t num = algorithm->num_alignments();
-        end = clock();
-        cout << "There are " << num << " optimal alignments" << endl;
-        cout << "Computed in " << (end - start) / CLOCKS_PER_SEC << " seconds." << endl << endl;
-
-        print_alignment_latex(alignment);
+        if(algorithm->check()){
+            cout << "SUCCESS!!! Alignment score matches the optimal alignment score!!!!" << endl;
+        }
+        else{
+            cout << "FAIL!!! Alignment score DOES NOT MATCH the optimal alignment score!!!!" << endl;
+        }
+       
+        if(strcmp(argv[1], "global_linear") == 0){ 
+            cout << "Computing the total number of optimal alignments" << endl;
+            start = clock();
+            uint64_t num = algorithm->num_alignments();
+            end = clock();
+            cout << "There are " << num << " optimal alignments" << endl;
+            cout << "Computed in " << (end - start) / CLOCKS_PER_SEC << " seconds." << endl << endl;
+        }
+        //print_alignment_latex(alignment);
     }
 
     return EXIT_SUCCESS;

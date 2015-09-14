@@ -149,3 +149,38 @@ int GlobalAffine::get_n() {
 int GlobalAffine::get_m() {
     return this->m;
 }
+
+
+bool GlobalAffine::check()
+{
+    
+    size_t i,j;
+    int64_t myscore = 0;
+    i=0;
+    while(i<alignment.size()){
+    
+        if(alignment[i]!='-' && alignment[i+1]!='-'){
+            myscore = myscore + score[getIndexFromProtein(alignment[i])][getIndexFromProtein(alignment[i+1])];
+            i = i + 2;
+        }
+        else{
+         
+            myscore = myscore + alpha + beta;
+            j = i+2;
+            while(j < alignment.size() && ( alignment[j] == '-' || alignment[j+1] == '-' )){
+             
+                myscore += alpha;
+                j = j + 2;
+                
+            }
+            
+            i = j;
+            
+        }
+    
+    }
+    
+    if(myscore == S[n-1][m-1]) return true;
+    return false;
+
+}

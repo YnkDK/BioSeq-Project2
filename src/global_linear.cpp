@@ -155,3 +155,20 @@ int GlobalLinear::get_n() {
 int GlobalLinear::get_m() {
     return this->m;
 }
+
+bool GlobalLinear::check()
+{
+    
+    size_t i;
+    int64_t myscore = 0;
+    for(i=0;i<alignment.size();i+=2){
+    
+        if(alignment[i]!='-' && alignment[i+1]!='-')
+            myscore = myscore + score[getIndexFromProtein(alignment[i])][getIndexFromProtein(alignment[i+1])];
+        else myscore = myscore + gapcost;
+    
+    }
+    if(myscore == S[n-1][m-1]) return true;
+    return false;
+
+}

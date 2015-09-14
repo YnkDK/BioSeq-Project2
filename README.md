@@ -19,13 +19,7 @@ To compile all sources, run `./make.sh` (or the usual `cmake` command, the bash 
 The main found is now located in `build/bin`.
 
 # How to run a single algorithm
-In the root folder, simply run `./[algorithm] input/*.fasta input/*.fasta`, e.g. to use the global alignment with the
-linear gap cost function, use `./global_linear input/p2_seq1.fasta input/p2_seq2.fasta`
 
-Available algorithms: `global_linear`,
+./executable [all,global_linear,global_affine] seq1 seq2
 
-# How to run performance tests
-TODO
-
-# How to run correctness tests
-TODO
+Available algorithms: `global_linear`, `global_affine`

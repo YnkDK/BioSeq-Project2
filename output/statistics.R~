@@ -6,6 +6,6 @@ data$n <- strtoi(data$n)
 data$m <- strtoi(data$m)
 data$CPU.clock <- strtoi(data$CPU.clock)
 data$nm <- data$n * data$m
-ggplot(data, aes(nm, CPU.clock/nm, color = Algorithm)) + 
+ggplot(data, aes(nm, CPU.clock, color = Algorithm)) + 
   geom_point() +
   stat_summary(fun.y=median, geom="line")

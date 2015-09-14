@@ -68,6 +68,10 @@ public:
 
     int get_n();
     int get_m();
+    
+    
+    bool check();
+
 };
 
 #endif //BIOSEQ_PROJECT2_GLOBAL_LINEAR_H
